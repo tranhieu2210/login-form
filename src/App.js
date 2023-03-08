@@ -1,18 +1,8 @@
-import { useSelector } from 'react-redux';
-import {selectUser} from './feautures/userSlice'
-import './App.css';
-import Login from './Components/Login'
-import Logout from './Components/Logout'
+import "./App.css";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
-  const user = useSelector(selectUser)
-  return (
-    <div className="App">
-      {user ?
-       <Logout /> : <Login />
-      }
-    </div>
-  );
+  return <BrowserRouter></BrowserRouter>;
 }
 
 export default App;

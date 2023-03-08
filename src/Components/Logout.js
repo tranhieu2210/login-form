@@ -10,7 +10,6 @@ const Logout = () => {
 
     dispatch(logout());
   };
-  console.log(user);
   return (
     <div className="logout">
       <h1>

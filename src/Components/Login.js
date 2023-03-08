@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { login } from "../feautures/userSlice";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { login, selectUser } from "../feautures/userSlice";
 
 const Login = () => {
   const [name, setName] = useState("");
@@ -9,18 +10,26 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
+  const isLogin = useSelector(selectUser);
+  const navigate = useNavigate()
+  useEffect(()=>{
+    if(isLogin) {
+      navigate('/')
+    } else {
+      navigate()
+    }
+  })
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    dispatch(
-      login({
-        name: name,
-        email: email,
-        password: password,
-        loggedIn: true,
-      })
-    );
+    const payload = {
+      name,
+      email,
+      password,
+    };
+    dispatch(login(payload));
   };
+
   return (
     <div className="login">
       <form className="login__form" onSubmit={(e) => handleSubmit(e)}>
